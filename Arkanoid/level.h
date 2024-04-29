@@ -1,5 +1,6 @@
 #ifndef LEVEL_H
 #define LEVEL_H
+
 #include <QVector>
 #include <QPoint>
 
@@ -15,8 +16,9 @@ class Level
 public:
     Level();
     ~Level();
-    void loadLevel(const QString& pathFile);
+    void loadLevel();
     QList<LevelData>* m_levelData;
 };
+
 
 #endif // LEVEL_H

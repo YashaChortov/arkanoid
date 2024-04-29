@@ -9,12 +9,14 @@ SOURCES += \
     gamescene.cpp \
     level.cpp \
     main.cpp \
+    randomlevel.cpp \
     view.cpp
 
 HEADERS += \
     game.h \
     gamescene.h \
     level.h \
+    randomlevel.h \
     view.h
 
 RESOURCES += \

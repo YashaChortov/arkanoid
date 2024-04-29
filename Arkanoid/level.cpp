@@ -2,7 +2,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
-#include "game.h"
+//#include "game.h"
+
+#include "randomlevel.h"
 
 Level::Level()
     : m_levelData(new QVector<LevelData>())
@@ -15,51 +17,37 @@ Level::~Level()
     delete m_levelData;
 }
 
-void Level::loadLevel(const QString &pathFile)
+void Level::loadLevel()
 {
-    QFile file(pathFile);
 
-    if(file.open(QIODeviceBase::Text | QIODeviceBase::ReadOnly))
-    {
-        qDebug() << "Level is loaded successully";
-    }
-    else
-    {
-        qDebug() << "Level is not loaded successully";
-    }
     m_levelData->clear();
-    QTextStream stream(&file);
-    while (!stream.atEnd() ) {
-        QString line = stream.readLine();
-        if(line.isEmpty() || line.startsWith("//"))
-        {
-            continue;
-        }
-        Q_ASSERT(line.split(";").count() == 3);
-        LevelData levelData;
-        int colorValue = line.split(";").at(0).toInt();
-        if(colorValue < 0)
-        {
-            qDebug() << "Warning colorValue should be between " << 0 << " and " << Game::COUNT_OF_KIND_OF_BLOCKS-1 <<". Not " << colorValue;
-            colorValue = 0;
-        }
-        else if(colorValue > (Game::COUNT_OF_KIND_OF_BLOCKS - 1))
-        {
-            qDebug() << "Warning colorValue should be between " << 0 << " and " << Game::COUNT_OF_KIND_OF_BLOCKS-1 <<". Not " << colorValue;
-            colorValue = Game::COUNT_OF_KIND_OF_BLOCKS - 1;
-        }
+    LevelData levelData;
+    int colorValue;
+    int x;
+    int y;
+    QPoint position;
+    int numberOfBlocks = Random::get(20, 40);
+
+    for (int i = 0; i < numberOfBlocks; ++i) {
+
+        qDebug() << i;
+
+        // Генерируем случайное число от 0 до 4
+        colorValue = /*rand() % 4 + 0*/ Random::get(0, 4);
         levelData.colorValue = colorValue;
+        //qDebug() << "randomColour " << colorValue;
 
-        int x = line.split(";").at(1).toInt();
-        int y = line.split(";").at(2).toInt();
+        // Генерируем случайное число от 0 до 10 и умножаем на 48
+        x = /*(rand() % 11 + 0)*/ Random::get(0, 10) * 48;
 
-        QPoint position = QPoint(x,y);
+        // Генерируем случайное число от 0 до 15 и умножаем на 16
+        y = /*(rand() % 15 + 0)*/ Random::get(0, 15) * 16;
+
+        position = QPoint(x,y);
         levelData.position = position;
-
         levelData.isDeleted = false;
-
         m_levelData->push_back(levelData);
     }
 
-    file.close();
+
 }

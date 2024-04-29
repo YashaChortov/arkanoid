@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>levels/level.lvl</file>
         <file>images/all_numbers.png</file>
-        <file>levels/qt_level.lvl</file>
         <file>levels/head_level.lvl</file>
         <file>levels/umbrella.lvl</file>
         <file>levels/character.lvl</file>
@@ -17,5 +16,6 @@
         <file>images/bg_gameover.png</file>
         <file>images/bg_pause.png</file>
         <file>images/bg_victory.png</file>
+        <file>levels/random.lvl</file>
     </qresource>
 </RCC>

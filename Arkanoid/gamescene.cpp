@@ -96,11 +96,10 @@ void GameScene::loadPixmap()
     }
 }
 
-void GameScene::loadLevel(const QString &pathFile)
+void GameScene::loadLevel()
 {
-    m_level.loadLevel(pathFile);
+    m_level.loadLevel();
     m_blockItems.clear();
-
 }
 
 void GameScene::clampPaddle()
